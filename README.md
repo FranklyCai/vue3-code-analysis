@@ -140,6 +140,7 @@ watch 的 flush 时机分为三类，分别为`pre`，`post`和`sync`：
 ![watchOptionsBase.png](images/watchOptionsBase.png)
 
 这三个指的什么意思？`pre`代表前，`post`代表后，而`sync`代表同步。在Vue中，`watch`的副作用（也就是回调函数）默认情况下是异步执行的（`pre`）。这样做的好处在于它可以帮我们排除掉一些重复的副作用 —— 我们知道`watch`的数据源可以有多个，当我们连续对数据源进行多次操作的时候，就会多次触发副作用。通过异步的方式我们就可以排除掉重复的副作用，这样可以达到更好的性能，也更符合功能的预期。如果你并不希望这种默认行为，可以给`watch`加上`flush:sync`选项。
+
 在Vue中主要存在三个异步任务队列，分别是`queue`（存放与组件更新——`render`相关的副作用）、`pendingPreFlushCbs`/`activePreFlushCbs`（存放需要在render执行前执行的副作用）和`pendingPostFlushCbs`/`activePostFlushCbs`（存放需要在render执行后执行的副作用）。
 
 `flush`选项的`pre`和`post`就分别对应第二个和第三个队列
